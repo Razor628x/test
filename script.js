@@ -8,8 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const targetElement = document.querySelector(targetId);
 
             if (targetElement) {
-                // Kalkulasi offset header
-                const headerOffset = document.querySelector('header').offsetHeight || 70; // fallback jika header tidak ditemukan
+                const headerOffset = document.querySelector('header').offsetHeight || 70; 
                 const elementPosition = targetElement.getBoundingClientRect().top;
                 const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
@@ -18,14 +17,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     behavior: 'smooth'
                 });
 
-                // Update kelas 'active' di navigasi
                 document.querySelectorAll('header nav ul li a').forEach(link => link.classList.remove('active'));
                 this.classList.add('active');
 
-                // Tutup menu mobile jika terbuka
                 const navUl = document.querySelector('header nav ul');
                 if (navUl.classList.contains('active')) {
                     navUl.classList.remove('active');
+                    // Optional: Change hamburger icon back
+                    const menuToggle = document.querySelector('.menu-toggle');
+                    if (menuToggle) menuToggle.innerHTML = '☰';
                 }
             }
         });
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const headerHeight = document.querySelector('header').offsetHeight || 70;
 
         sections.forEach(section => {
-            const sectionTop = section.offsetTop - headerHeight - 50; // -50 untuk buffer
+            const sectionTop = section.offsetTop - headerHeight - 100; // Adjusted buffer
             if (pageYOffset >= sectionTop) {
                 current = section.getAttribute('id');
             }
@@ -52,8 +52,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 a.classList.add('active');
             }
         });
-        // Jika di paling atas, aktifkan link Beranda
-        if (pageYOffset < (sections[0]?.offsetTop - headerHeight - 50 || 200) ) {
+        
+        if (pageYOffset < (sections[0]?.offsetTop - headerHeight - 100 || 200) ) {
             navLi.forEach(a => a.classList.remove('active'));
             const homeLink = document.querySelector('header nav ul li a[href="#hero"]');
             if (homeLink) homeLink.classList.add('active');
@@ -68,7 +68,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (selectPackageButtons && pilihanPaketSelect) {
         selectPackageButtons.forEach(button => {
             button.addEventListener('click', function(e) {
-                // e.preventDefault(); // Dihapus karena href sudah ke #order-form
                 const packageName = this.getAttribute('data-package');
                 for (let i = 0; i < pilihanPaketSelect.options.length; i++) {
                     if (pilihanPaketSelect.options[i].value === packageName) {
@@ -76,7 +75,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         break;
                     }
                 }
-                // Scroll ke form tidak diperlukan lagi karena href sudah benar
             });
         });
     }
@@ -87,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (orderForm && formMessage) {
         orderForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // Mencegah submit standar
+            event.preventDefault(); 
 
             const nama = document.getElementById('nama').value.trim();
             const email = document.getElementById('email').value.trim();
@@ -100,52 +98,86 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
-            // Di sini Anda akan mengirim data ke backend atau layanan email
-            // Untuk demo, kita hanya tampilkan di console dan beri pesan sukses
-            console.log("Formulir Terkirim:");
+            // Simulasi pengiriman form
+            console.log("Formulir Terkirim (Simulasi):");
             console.log("Nama:", nama);
             console.log("Email:", email);
             console.log("Telepon:", telepon);
             console.log("Paket:", paket);
-            console.log("Jenis Video:", document.getElementById('jenisVideo').value.trim());
-            console.log("Estimasi Durasi:", document.getElementById('durasiEstimasi').value.trim());
-            console.log("Link Materi:", document.getElementById('linkMateri').value.trim());
+            console.log("Jenis Video:", document.getElementById('jenisVideo').value);
+            console.log("Estimasi Durasi:", document.getElementById('durasiEstimasi').value);
+            console.log("Link Materi:", document.getElementById('linkMateri').value);
             console.log("Deskripsi:", deskripsi);
 
-            displayFormMessage('Terima kasih! Permintaan Anda telah terkirim. Kami akan segera menghubungi Anda.', 'success');
-            orderForm.reset(); // Kosongkan form
-            if (pilihanPaketSelect) pilihanPaketSelect.selectedIndex = 0; // Reset pilihan paket
 
-            // Scroll ke atas untuk melihat pesan (opsional)
-            // orderForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            displayFormMessage('Terima kasih! Permintaan Anda telah terkirim. Kami akan segera menghubungi Anda.', 'success');
+            orderForm.reset(); 
+            if (pilihanPaketSelect) pilihanPaketSelect.selectedIndex = 0; 
         });
     }
 
     function displayFormMessage(message, type) {
         if (formMessage) {
             formMessage.textContent = message;
-            formMessage.className = 'form-message-feedback'; // Reset class
-            formMessage.classList.add(type); // 'success' or 'error'
+            formMessage.className = 'form-message-feedback'; 
+            formMessage.classList.add(type); 
+            formMessage.style.display = 'block'; // Make sure it's visible
             
             setTimeout(() => {
-                formMessage.className = 'form-message-feedback'; // Sembunyikan lagi
-            }, 7000); // Pesan akan hilang setelah 7 detik
+                formMessage.style.display = 'none'; // Hide again
+                formMessage.className = 'form-message-feedback';
+            }, 7000); 
         }
     }
 
     // Hamburger Menu Toggle untuk Mobile
-    const menuToggle = document.createElement('button');
-    menuToggle.classList.add('menu-toggle');
-    menuToggle.innerHTML = '☰'; // Kode HTML untuk ikon hamburger
-    const navElement = document.querySelector('header nav');
+    const menuToggle = document.querySelector('.menu-toggle') || document.createElement('button'); // Use existing or create
+    if (!document.querySelector('.menu-toggle')) { // If it was created, configure and insert
+        menuToggle.classList.add('menu-toggle');
+        menuToggle.innerHTML = '☰'; 
+        const navElement = document.querySelector('header nav');
+        const navUl = document.querySelector('header nav ul');
+        if (navElement && navUl) {
+            navElement.insertBefore(menuToggle, navUl); 
+        }
+    }
+    
     const navUl = document.querySelector('header nav ul');
-
-    if (navElement && navUl) {
-        navElement.insertBefore(menuToggle, navUl); // Sisipkan tombol sebelum ul
-
+    if (menuToggle && navUl) {
         menuToggle.addEventListener('click', function() {
             navUl.classList.toggle('active');
+            // Optional: Change hamburger icon
+            if (navUl.classList.contains('active')) {
+                menuToggle.innerHTML = '✕'; // Close icon
+            } else {
+                menuToggle.innerHTML = '☰'; // Hamburger icon
+            }
         });
     }
+
+    // Scroll Reveal Animation
+    const revealElements = document.querySelectorAll('.reveal-on-scroll');
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const delay = parseInt(entry.target.dataset.delay) || 0;
+                setTimeout(() => {
+                    entry.target.classList.add('visible');
+                }, delay);
+                // observer.unobserve(entry.target); // Optional: stop observing after revealed once
+            } else {
+                 // Optional: To re-trigger animation on scroll up then down again
+                 // entry.target.classList.remove('visible');
+            }
+        });
+    }, {
+        root: null, // viewport
+        threshold: 0.1, // 10% of item is visible
+        // rootMargin: "0px 0px -50px 0px" // Optional: trigger a bit earlier/later
+    });
+
+    revealElements.forEach(el => {
+        revealObserver.observe(el);
+    });
 
 });

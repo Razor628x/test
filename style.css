@@ -12,11 +12,15 @@
     --dark-text: #3A3A3A; /* Sedikit lebih lembut dari #333 */
     --subtle-text: #555555;
     --accent-color: #B8860B; /* Warna emas gelap/coklat muda untuk aksen */
+    --accent-color-darker: #a0741d;
+    --accent-color-lighter-transparent: rgba(184, 134, 11, 0.1);
     --border-color: #E0E0E0;
     --success-bg: #d4edda;
     --success-text: #155724;
     --error-bg: #f8d7da;
     --error-text: #721c24;
+    --hero-text-color: #FFFFFF;
+    --hero-accent-color: #FFD700; /* Gold yang lebih cerah untuk hero */
 }
 
 body {
@@ -64,32 +68,34 @@ nav ul {
 }
 
 nav ul li {
-    margin-left: 30px; /* Jarak antar menu item */
+    margin-left: 25px; /* Jarak antar menu item sedikit dikurangi */
 }
 
 nav ul li a {
     text-decoration: none;
     color: var(--subtle-text);
     font-weight: 400; /* Normal weight untuk menu */
-    font-size: 0.95em;
+    font-size: 0.90em; /* Sedikit lebih kecil untuk menampung lebih banyak item */
     transition: color 0.3s ease, font-weight 0.3s ease;
+    padding-bottom: 5px;
 }
 
 nav ul li a:hover,
 nav ul li a.active {
     color: var(--accent-color);
     font-weight: 600; /* Sedikit bold saat hover/active */
+    border-bottom: 2px solid var(--accent-color);
 }
 
 /* Utility Classes */
 .section-padding {
-    padding: 70px 0; /* Padding atas bawah untuk setiap section */
+    padding: 80px 0; /* Padding atas bawah untuk setiap section */
 }
 .section-title {
     text-align: center;
     font-family: 'Playfair Display', serif;
-    font-size: 2.4em; /* Ukuran judul section */
-    margin-bottom: 50px;
+    font-size: 2.6em; /* Ukuran judul section */
+    margin-bottom: 60px;
     color: var(--dark-text);
     font-weight: 700;
     position: relative;
@@ -97,10 +103,11 @@ nav ul li a.active {
 .section-title::after { /* Garis bawah dekoratif untuk judul section */
     content: '';
     display: block;
-    width: 70px;
-    height: 3px;
+    width: 80px;
+    height: 4px;
     background-color: var(--accent-color);
-    margin: 10px auto 0;
+    margin: 15px auto 0;
+    border-radius: 2px;
 }
 .text-center {
     text-align: center;
@@ -109,153 +116,211 @@ nav ul li a.active {
 
 /* Hero Section */
 #hero {
-    background-color: var(--white-bg); /* Atau bisa gunakan gambar latar yang elegan */
-    padding: 100px 0; /* Padding lebih besar untuk hero */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('images/hero-background.png'); /* MODIFIED: Local image path */
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed; /* Parallax effect */
+    padding: 120px 0; /* Padding lebih besar untuk hero */
     text-align: center;
-    border-bottom: 1px solid var(--border-color);
+    color: var(--hero-text-color);
 }
 
 #hero h1 {
     font-family: 'Playfair Display', serif;
-    font-size: 3.2em;
-    margin-bottom: 20px;
-    color: var(--dark-text);
+    font-size: 3.5em;
+    margin-bottom: 25px;
+    color: var(--hero-text-color);
     font-weight: 700;
     line-height: 1.3;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
 }
 
 #hero h1 span {
-    color: var(--accent-color);
+    color: var(--hero-accent-color);
 }
 
 #hero p {
-    font-size: 1.15em;
-    color: var(--subtle-text);
-    max-width: 750px;
-    margin: 0 auto 35px auto;
+    font-size: 1.2em;
+    color: var(--hero-text-color);
+    max-width: 780px;
+    margin: 0 auto 40px auto;
+    opacity: 0.9;
 }
 
 .cta-button {
     display: inline-block;
     background-color: var(--accent-color);
     color: var(--white-bg) !important; /* Pastikan warna teks putih */
-    padding: 14px 35px;
+    padding: 15px 40px;
     border: none;
-    border-radius: 30px; /* Rounded button */
+    border-radius: 50px; /* More rounded button */
     text-decoration: none;
-    font-size: 1em;
+    font-size: 1.05em;
     font-weight: 600;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 10px rgba(184, 134, 11, 0.3); /* Bayangan sesuai warna aksen */
+    box-shadow: 0 5px 15px rgba(184, 134, 11, 0.35); /* Bayangan sesuai warna aksen */
 }
 
 .cta-button:hover {
-    background-color: #a0741d;
-    transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(160, 116, 29, 0.4);
+    background-color: var(--accent-color-darker);
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 7px 20px rgba(160, 116, 29, 0.45);
 }
 
 /* Services Section */
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
+    /* MODIFIED: Changed from auto-fit to fixed 2 columns for desktop */
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 35px;
     margin-top: 30px;
 }
 .service-item {
     background-color: var(--white-bg);
-    padding: 30px;
-    border-radius: 8px;
+    padding: 35px 30px;
+    border-radius: 10px;
     text-align: center;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.06);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .service-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
-.service-item img { /* Untuk ikon placeholder */
+.service-icon { /* Style untuk SVG icons */
     width: 60px;
     height: 60px;
     margin-bottom: 20px;
-    opacity: 0.7;
+    color: var(--accent-color); /* Warna ikon */
 }
 .service-item h3 {
-    font-size: 1.3em;
-    margin-bottom: 10px;
+    font-size: 1.35em;
+    margin-bottom: 12px;
     color: var(--dark-text);
 }
 .service-item p {
-    font-size: 0.9em;
+    font-size: 0.95em;
     color: var(--subtle-text);
+    line-height: 1.6;
+}
+
+/* Portfolio Section */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+.portfolio-item {
+    background-color: var(--white-bg);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.07);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+.portfolio-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+.portfolio-item img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    display: block;
+}
+.portfolio-caption {
+    padding: 15px;
+    text-align: center;
+    font-weight: 600;
+    color: var(--dark-text);
+    background-color: var(--white-bg);
 }
 
 
 /* Pricing Section */
-/* #pricing sudah dicakup oleh .section-padding */
-/* #pricing h2 sudah dicakup oleh .section-title */
-
 .pricing-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Ukuran min card lebih besar */
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 35px;
 }
 
 .pricing-card {
     background-color: var(--white-bg);
     border: 1px solid var(--border-color);
-    border-radius: 10px; /* Radius lebih besar */
-    padding: 35px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 12px; 
+    padding: 40px 35px;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.07);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
 .pricing-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    border-color: var(--accent-color);
 }
+
+.pricing-card.recommended-package {
+    border: 2px solid var(--accent-color);
+    box-shadow: 0 8px 30px var(--accent-color-lighter-transparent);
+    position: relative; /* For potential badge */
+}
+.pricing-card.recommended-package::before {
+    content: "Populer";
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--accent-color);
+    color: var(--white-bg);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.8em;
+    font-weight: 600;
+}
+
 
 .pricing-card h3 {
     font-family: 'Playfair Display', serif;
-    font-size: 1.6em;
+    font-size: 1.7em;
     color: var(--accent-color);
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     font-weight: 700;
     text-align: center;
 }
 
 .pricing-card .price-tag {
-    font-size: 2.2em;
+    font-size: 2.4em;
     font-weight: 700;
     color: var(--dark-text);
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     text-align: center;
     display: block;
 }
 
 .pricing-card .package-description {
     color: var(--subtle-text);
-    margin-bottom: 25px;
+    margin-bottom: 30px;
     font-size: 0.95em;
     text-align: center;
-    min-height: 60px; /* Jaga tinggi deskripsi agar seragam */
+    min-height: 60px; 
 }
 
 .pricing-card ul {
     list-style: none;
-    margin-bottom: 30px;
+    margin-bottom: 35px;
     padding-left: 5px;
     flex-grow: 1;
 }
 
 .pricing-card ul li {
-    margin-bottom: 12px;
+    margin-bottom: 14px;
     position: relative;
-    padding-left: 25px;
+    padding-left: 30px;
     font-size: 0.95em;
     color: var(--subtle-text);
 }
@@ -266,15 +331,110 @@ nav ul li a.active {
     position: absolute;
     left: 0;
     font-weight: bold;
-    font-size: 1.1em;
+    font-size: 1.2em;
+    top: -2px;
 }
 
-.pricing-card .cta-button { /* Tombol di dalam pricing card */
+.pricing-card .cta-button { 
     width: 100%;
     text-align: center;
     margin-top: auto;
-    padding: 12px 20px; /* Padding tombol di card sedikit lebih kecil */
+    padding: 14px 20px;
 }
+
+/* Testimonials Section */
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+.testimonial-card {
+    background-color: var(--white-bg);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+    border-left: 5px solid var(--accent-color);
+}
+.testimonial-card .quote {
+    font-style: italic;
+    color: var(--subtle-text);
+    margin-bottom: 15px;
+    position: relative;
+    padding-left: 30px;
+}
+.testimonial-card .quote::before {
+    content: '“';
+    font-family: 'Playfair Display', serif;
+    font-size: 3em;
+    color: var(--accent-color);
+    position: absolute;
+    left: -5px;
+    top: -15px;
+    opacity: 0.7;
+}
+.testimonial-card .author {
+    font-weight: 600;
+    color: var(--dark-text);
+    text-align: right;
+}
+
+/* FAQ Section */
+.faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+.faq-item {
+    background-color: var(--white-bg);
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.04);
+}
+.faq-item details {
+    border-radius: 8px;
+    overflow: hidden;
+}
+.faq-item summary {
+    padding: 20px;
+    font-weight: 600;
+    color: var(--dark-text);
+    cursor: pointer;
+    list-style-position: inside;
+    position: relative;
+    transition: background-color 0.2s ease;
+}
+.faq-item summary:hover {
+    background-color: var(--accent-color-lighter-transparent);
+}
+.faq-item summary::-webkit-details-marker { /* Hide default arrow for Webkit */
+    display: none;
+}
+.faq-item summary::after { /* Custom arrow */
+    content: '+';
+    font-size: 1.5em;
+    color: var(--accent-color);
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: transform 0.3s ease;
+}
+.faq-item details[open] summary::after {
+    content: '−'; /* Minus sign when open */
+    transform: translateY(-50%) rotate(180deg);
+}
+.faq-item details[open] summary {
+    background-color: var(--accent-color-lighter-transparent);
+    border-bottom: 1px solid var(--border-color);
+}
+.faq-item p {
+    padding: 20px;
+    color: var(--subtle-text);
+    line-height: 1.8;
+    background-color: var(--white-bg);
+}
+
 
 /* Order Form Section */
 #videoOrderForm {
@@ -311,7 +471,7 @@ nav ul li a.active {
     border-radius: 5px;
     font-size: 1em;
     font-family: 'Poppins', sans-serif;
-    background-color: #fdfdfd; /* Sedikit beda dari white-bg */
+    background-color: #fdfdfd; 
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -320,7 +480,7 @@ nav ul li a.active {
 .form-group textarea:focus {
     outline: none;
     border-color: var(--accent-color);
-    box-shadow: 0 0 0 2px rgba(184, 134, 11, 0.2);
+    box-shadow: 0 0 0 3px var(--accent-color-lighter-transparent);
 }
 
 .form-group textarea {
@@ -328,7 +488,7 @@ nav ul li a.active {
     min-height: 120px;
 }
 
-.form-submit-button { /* Spesifik untuk tombol submit form */
+.form-submit-button { 
     width: 100%;
 }
 
@@ -338,7 +498,7 @@ nav ul li a.active {
     border-radius: 5px;
     text-align: center;
     font-weight: 600;
-    display: none; /* Sembunyikan awal */
+    display: none; 
 }
 .form-message-feedback.success {
     background-color: var(--success-bg);
@@ -362,6 +522,7 @@ nav ul li a.active {
 }
 .contact-link:hover {
     text-decoration: underline;
+    color: var(--accent-color-darker);
 }
 
 /* Footer */
@@ -369,7 +530,7 @@ footer {
     background-color: var(--dark-text);
     color: var(--cream-bg);
     text-align: center;
-    padding: 25px 0;
+    padding: 30px 0;
     margin-top: 50px;
 }
 
@@ -378,18 +539,39 @@ footer p {
     opacity: 0.8;
 }
 
+/* Scroll Animations */
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(40px);
+    transition-property: opacity, transform;
+    transition-duration: 0.7s;
+    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Ease out back style */
+}
+.reveal-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
 /* Hamburger Menu untuk Mobile (Dasar) */
 .menu-toggle {
-    display: none; /* Sembunyikan di desktop */
-    font-size: 1.5em;
+    display: none; 
+    font-size: 1.8em;
     background: none;
     border: none;
     color: var(--dark-text);
     cursor: pointer;
+    padding: 5px;
 }
 
 /* Responsive Design */
 @media (max-width: 992px) {
+    nav ul li {
+        margin-left: 15px; /* Adjust for more items */
+    }
+    nav ul li a {
+        font-size: 0.85em; /* Adjust for more items */
+    }
     .pricing-grid {
         grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
     }
@@ -399,9 +581,11 @@ footer p {
     .section-title {
         font-size: 2.2em;
     }
+    
+    /* Hamburger menu logic from original */
     nav ul {
         position: absolute;
-        top: 100%; /* Tepat di bawah header */
+        top: 100%; 
         left: 0;
         background-color: var(--white-bg);
         width: 100%;
@@ -409,22 +593,25 @@ footer p {
         align-items: center;
         padding: 10px 0;
         box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-        display: none; /* Sembunyikan default */
         max-height: 0;
         overflow: hidden;
-        transition: max-height 0.3s ease-out;
+        transition: max-height 0.4s ease-out, padding 0.4s ease-out;
     }
-    nav ul.active { /* Untuk JS toggle */
-        display: flex; /* Tampilkan saat active */
-        max-height: 300px; /* Atau tinggi yang cukup */
+    nav ul.active { 
+        max-height: 500px; /* Or height sufficient for all items */
+        padding: 20px 0;
     }
     nav ul li {
-        margin: 10px 0;
+        margin: 12px 0;
         width: 100%;
         text-align: center;
     }
+    nav ul li a {
+        font-size: 1em; /* Make mobile nav links larger */
+        padding: 10px 0;
+    }
     .menu-toggle {
-        display: block; /* Tampilkan tombol burger */
+        display: block; 
     }
 }
 
@@ -433,33 +620,49 @@ footer p {
         font-size: 1.7em;
     }
     #hero {
-        padding: 70px 0;
+        padding: 90px 0;
+        background-attachment: scroll; /* Disable parallax on mobile for performance/rendering */
     }
     #hero h1 {
-        font-size: 2.2em;
+        font-size: 2.4em;
     }
     #hero p {
-        font-size: 1em;
+        font-size: 1.05em;
     }
     .section-title {
         font-size: 2em;
+        margin-bottom: 40px;
     }
-    .pricing-grid {
+    .section-title::after{
+        width: 60px;
+        height: 3px;
+        margin-top: 10px;
+    }
+    .pricing-grid,
+    .services-grid, /* This rule will now make services-grid 1 column */
+    .portfolio-grid,
+    .testimonials-grid {
         grid-template-columns: 1fr; /* Satu kolom di mobile */
         gap: 25px;
     }
     .pricing-card {
-        padding: 30px;
+        padding: 30px 25px;
     }
-    .services-grid {
-        grid-template-columns: 1fr;
+    .service-item {
+        padding: 30px 25px;
     }
     #videoOrderForm {
-        padding: 30px;
+        padding: 30px 25px;
+    }
+    .faq-item summary, .faq-item p {
+        padding: 15px;
     }
 }
 
 @media (max-width: 480px) {
+    #hero {
+        padding: 70px 0;
+    }
     #hero h1 {
         font-size: 2em;
     }
@@ -467,13 +670,20 @@ footer p {
         font-size: 0.95em;
     }
     .cta-button {
-        padding: 12px 28px;
+        padding: 12px 30px;
         font-size: 0.95em;
     }
     .section-title {
         font-size: 1.8em;
     }
     .section-padding {
-        padding: 50px 0;
+        padding: 60px 0;
+    }
+    nav ul li {
+        margin-left: 0; /* Hamburger menu aligns items centrally */
+    }
+    .form-group input, .form-group select, .form-group textarea {
+        padding: 10px 12px;
+        font-size: 0.95em;
     }
 }

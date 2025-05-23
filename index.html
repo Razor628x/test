@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prime Edit Media - Jasa Video Editing Profesional</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Impor Font Google (Opsional, tapi disarankan untuk tampilan lebih baik) -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -17,8 +16,11 @@
             <ul>
                 <li><a href="#hero" class="active">Beranda</a></li>
                 <li><a href="#services">Layanan</a></li>
+                <li><a href="#portfolio">Portofolio</a></li>
                 <li><a href="#pricing">Paket Harga</a></li>
-                <li><a href="#order-form">Pesan Sekarang</a></li>
+                <li><a href="#testimonials">Testimoni</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#order-form">Pesan</a></li>
                 <li><a href="#contact">Kontak</a></li>
             </ul>
         </nav>
@@ -26,35 +28,35 @@
 
     <!-- Hero Section -->
     <section id="hero">
-        <div class="container">
+        <div class="container reveal-on-scroll">
             <h1>Ubah Rekaman Mentah Menjadi <span>Karya Sinematik</span></h1>
             <p>Dapatkan jasa video editing profesional, cepat, dan terjangkau yang disesuaikan dengan kebutuhan Anda. Dari vlog sederhana hingga video promosi yang kompleks.</p>
             <a href="#pricing" class="cta-button">Lihat Paket Harga</a>
         </div>
     </section>
 
-    <!-- Services Section (Tambahan untuk detail) -->
+    <!-- Services Section -->
     <section id="services" class="section-padding">
         <div class="container">
-            <h2 class="section-title">Apa yang Bisa Kami Edit Untuk Anda?</h2>
+            <h2 class="section-title reveal-on-scroll">Apa yang Bisa Kami Edit Untuk Anda?</h2>
             <div class="services-grid">
-                <div class="service-item">
-                    <img src="https://via.placeholder.com/80x80.png?text=Vlog" alt="Icon Vlog">
+                <div class="service-item reveal-on-scroll">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="service-icon"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4zM15 16H5V8h10v8zm-6-1.5L11.25 12 9 9.75V14.5zm4-2.5L10.75 12 13 9.75V12z"/></svg>
                     <h3>Video Vlog & Konten YouTube</h3>
                     <p>Editing dinamis untuk konten kreator, optimasi intro & outro, penambahan call-to-action.</p>
                 </div>
-                <div class="service-item">
-                    <img src="https://via.placeholder.com/80x80.png?text=Event" alt="Icon Event">
+                <div class="service-item reveal-on-scroll" data-delay="100">
+                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="service-icon"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4zM20 12V7H4v5.5c0 2.25 3.04 4.08 7 4.45V19H9v2h6v-2h-2v-2.05c3.96-.37 7-2.2 7-4.45zM6 9h12v1c0 1.65-2.69 3-6 3s-6-1.35-6-3V9z"/></svg>
                     <h3>Video Acara (Pernikahan, Ulang Tahun)</h3>
                     <p>Mengabadikan momen spesial Anda dengan sentuhan sinematik dan penceritaan yang mengalir.</p>
                 </div>
-                <div class="service-item">
-                    <img src="https://via.placeholder.com/80x80.png?text=Promosi" alt="Icon Promosi">
+                <div class="service-item reveal-on-scroll" data-delay="200">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="service-icon"><path d="M20 4H4c-1.11 0-2 .9-2 2v12c0 1.1.89 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V6h16v12zM6 10h2v2H6zm0 4h8v2H6zm10-4h2v2h-2zm-4 0h2v2h-2zM6 7h12v1H6z"/></svg>
                     <h3>Video Promosi Produk/Jasa</h3>
                     <p>Membuat video iklan yang menarik dan persuasif untuk meningkatkan penjualan dan brand awareness.</p>
                 </div>
-                 <div class="service-item">
-                    <img src="https://via.placeholder.com/80x80.png?text=Edukasi" alt="Icon Edukasi">
+                 <div class="service-item reveal-on-scroll" data-delay="300">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="service-icon"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93s3.05-7.44 7-7.93v15.86zm2-15.86c1.03.13 2 .45 2.87.93H14v-.93zm0 2.93H14V7h2c-.05.3-.1.6-.17.89zm0 1.89H14v1h2c-.05.3-.1.6-.17.89zm0 1.89H14v1h2c-.05.3-.1.6-.17.89zm0 1.89H14v1h2c-.05.3-.1.6-.17.89zm0 1.89H14v1h1.87c.87-.48 1.74-.8 2.87-.93zm0 1.93H14v1h1.87c.87-.48 1.74-.8 2.87-.93zm2.13-9.37c.27-.22.53-.46.77-.72.25.26.5.5.72.77L17 8.41l-1.15-1.15.28-.28zm-2.88 1.15L14 10l.75.75L16.5 9l-1.25-1.25zM12 4.07c3.95.49 7 3.85 7 7.93s-3.05 7.44-7 7.93V4.07z"/></svg>
                     <h3>Video Edukasi & Tutorial</h3>
                     <p>Menyajikan informasi kompleks menjadi mudah dipahami melalui visual yang menarik.</p>
                 </div>
@@ -65,10 +67,9 @@
     <!-- Pricing Section -->
     <section id="pricing" class="section-padding">
         <div class="container">
-            <h2 class="section-title">Pilih Paket Editing Anda</h2>
+            <h2 class="section-title reveal-on-scroll">Pilih Paket Editing Anda</h2>
             <div class="pricing-grid">
-                <!-- Paket 1: Basic Edit -->
-                <div class="pricing-card">
+                <div class="pricing-card reveal-on-scroll">
                     <div>
                         <h3>Paket Basic</h3>
                         <div class="price-tag">Rp 150.000,-</div>
@@ -85,8 +86,7 @@
                     <a href="#order-form" class="cta-button select-package-button" data-package="Basic - Rp 150.000">Pilih Paket</a>
                 </div>
 
-                <!-- Paket 2: Standard Edit -->
-                <div class="pricing-card">
+                <div class="pricing-card recommended-package reveal-on-scroll" data-delay="100">
                      <div>
                         <h3>Paket Pro</h3>
                         <div class="price-tag">Rp 450.000,-</div>
@@ -104,8 +104,7 @@
                     <a href="#order-form" class="cta-button select-package-button" data-package="Pro - Rp 450.000">Pilih Paket</a>
                 </div>
 
-                <!-- Paket 3: Premium Edit -->
-                <div class="pricing-card">
+                <div class="pricing-card reveal-on-scroll" data-delay="200">
                     <div>
                         <h3>Paket Ultimate</h3>
                         <div class="price-tag">Rp 1.500.000,-</div>
@@ -125,11 +124,65 @@
         </div>
     </section>
 
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="section-padding">
+        <div class="container">
+            <h2 class="section-title reveal-on-scroll">Apa Kata Klien Kami?</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card reveal-on-scroll">
+                    <p class="quote">"Hasil editingnya luar biasa! Cepat, profesional, dan sesuai dengan brief. Video promosi kami jadi jauh lebih menarik."</p>
+                    <p class="author">- Sarah D., Pemilik Kafe</p>
+                </div>
+                <div class="testimonial-card reveal-on-scroll" data-delay="100">
+                    <p class="quote">"Prime Edit Media sangat membantu mengembangkan channel YouTube saya. Editingnya kreatif dan responsif terhadap revisi."</p>
+                    <p class="author">- Budi S., Content Creator</p>
+                </div>
+                <div class="testimonial-card reveal-on-scroll" data-delay="200">
+                    <p class="quote">"Untuk video pernikahan kami, hasilnya sangat sinematik dan emosional. Momen-momen penting terekam dengan indah. Terima kasih!"</p>
+                    <p class="author">- Rina & Adi, Pasangan Pengantin</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="section-padding">
+        <div class="container">
+            <h2 class="section-title reveal-on-scroll">Pertanyaan Umum (FAQ)</h2>
+            <div class="faq-container">
+                <div class="faq-item reveal-on-scroll">
+                    <details>
+                        <summary>Berapa lama proses editing biasanya?</summary>
+                        <p>Waktu pengerjaan tergantung kompleksitas dan durasi video. Paket Basic biasanya 1-2 hari, Pro 2-4 hari, dan Ultimate bisa 3-7 hari. Kami akan memberikan estimasi lebih akurat setelah menerima materi Anda.</p>
+                    </details>
+                </div>
+                <div class="faq-item reveal-on-scroll" data-delay="100">
+                    <details>
+                        <summary>Bagaimana cara mengirim materi video mentah?</summary>
+                        <p>Anda bisa mengunggah materi video Anda ke layanan cloud storage seperti Google Drive, Dropbox, WeTransfer, lalu berikan link yang bisa kami akses melalui formulir pemesanan.</p>
+                    </details>
+                </div>
+                <div class="faq-item reveal-on-scroll" data-delay="200">
+                    <details>
+                        <summary>Apakah saya bisa meminta revisi?</summary>
+                        <p>Tentu! Setiap paket sudah termasuk jatah revisi minor. Jika membutuhkan revisi mayor atau revisi tambahan di luar paket, akan ada biaya tambahan yang akan kami informasikan terlebih dahulu.</p>
+                    </details>
+                </div>
+                <div class="faq-item reveal-on-scroll" data-delay="300">
+                    <details>
+                        <summary>Musik latar apa yang digunakan?</summary>
+                        <p>Kami menggunakan musik latar bebas royalti dari library kami. Jika Anda memiliki preferensi musik tertentu atau musik berlisensi, harap informasikan dan sediakan filenya.</p>
+                    </details>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Order Form Section -->
     <section id="order-form" class="section-padding">
         <div class="container">
-            <h2 class="section-title">Formulir Pemesanan</h2>
-            <form id="videoOrderForm">
+            <h2 class="section-title reveal-on-scroll">Formulir Pemesanan</h2>
+            <form id="videoOrderForm" class="reveal-on-scroll">
                 <div class="form-group">
                     <label for="nama">Nama Lengkap:</label>
                     <input type="text" id="nama" name="nama" required>
@@ -176,12 +229,11 @@
 
     <!-- Contact Section Sederhana -->
      <section id="contact" class="section-padding">
-        <div class="container text-center">
+        <div class="container text-center reveal-on-scroll">
              <h2 class="section-title">Hubungi Kami</h2>
              <p>Ada pertanyaan lebih lanjut atau butuh konsultasi khusus? Jangan ragu untuk menghubungi kami.</p>
              <p style="font-size: 1.2em; margin-top: 20px;">
-                 Email: <a href="mailto:info@primeeditmedia.com" class="contact-link">info@primeeditmedia.com</a><br>
-                 Telepon/WA: <a href="tel:+6281234567890" class="contact-link">+62 812-3456-7890</a>
+                 Email: <a href="mailto:info@primeeditmedia.com" class="contact-link">info@primeeditmedia.com</a>
              </p>
         </div>
      </section>
