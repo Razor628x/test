@@ -85,8 +85,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (orderForm && formMessage) {
         orderForm.addEventListener('submit', function(event) {
-            event.preventDefault(); 
+            event.preventDefault(); // Tetap cegah submit default
+        
+            const formData = new FormData(orderForm);
+            const action = orderForm.getAttribute('action');
 
+        // Validasi dasar sisi klien (opsional, karena Formspree juga bisa validasi)
             const nama = document.getElementById('nama').value.trim();
             const email = document.getElementById('email').value.trim();
             const telepon = document.getElementById('telepon').value.trim();
@@ -97,36 +101,54 @@ document.addEventListener('DOMContentLoaded', function() {
                 displayFormMessage('Harap isi semua kolom yang wajib diisi.', 'error');
                 return;
             }
-            
-            // Simulasi pengiriman form
-            console.log("Formulir Terkirim (Simulasi):");
-            console.log("Nama:", nama);
-            console.log("Email:", email);
-            console.log("Telepon:", telepon);
-            console.log("Paket:", paket);
-            console.log("Jenis Video:", document.getElementById('jenisVideo').value);
-            console.log("Estimasi Durasi:", document.getElementById('durasiEstimasi').value);
-            console.log("Link Materi:", document.getElementById('linkMateri').value);
-            console.log("Deskripsi:", deskripsi);
 
-
-            displayFormMessage('Terima kasih! Permintaan Anda telah terkirim. Kami akan segera menghubungi Anda.', 'success');
-            orderForm.reset(); 
-            if (pilihanPaketSelect) pilihanPaketSelect.selectedIndex = 0; 
+            fetch(action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json' // Penting agar Formspree mengembalikan JSON
+                }
+            })
+            .then(response => {
+                if (response.ok) { // response.ok berarti status 200-299
+                    return response.json(); // Jika sukses, Formspree mungkin kirim JSON
+                } else {
+                // Coba dapatkan error dari Formspree jika ada
+                    return response.json().then(data => {
+                        let errorMessage = 'Terjadi kesalahan saat mengirim formulir.';
+                        if (data && data.errors && data.errors.length > 0) {
+                            errorMessage = data.errors.map(err => err.message).join(', ');
+                        } else if (data && data.error) {
+                            errorMessage = data.error;
+                        }
+                        throw new Error(errorMessage);
+                    });
+                }
+            })
+            .then(data => { // data dari response.json() jika sukses
+                displayFormMessage('Terima kasih! Permintaan Anda telah terkirim. Kami akan segera menghubungi Anda.', 'success');
+                orderForm.reset();
+                const pilihanPaketSelect = document.getElementById('pilihanPaket');
+                if (pilihanPaketSelect) pilihanPaketSelect.selectedIndex = 0;
+            })
+            .catch(error => {
+                console.error("Error submitting form:", error);
+                displayFormMessage(`Gagal mengirim: ${error.message || 'Silakan coba lagi.'}`, 'error');
+            });
         });
     }
 
     function displayFormMessage(message, type) {
         if (formMessage) {
             formMessage.textContent = message;
-            formMessage.className = 'form-message-feedback'; 
-            formMessage.classList.add(type); 
-            formMessage.style.display = 'block'; // Make sure it's visible
-            
+            formMessage.className = 'form-message-feedback';
+            formMessage.classList.add(type);
+            formMessage.style.display = 'block';
+
             setTimeout(() => {
-                formMessage.style.display = 'none'; // Hide again
+                formMessage.style.display = 'none';
                 formMessage.className = 'form-message-feedback';
-            }, 7000); 
+            }, 7000);
         }
     }
 
