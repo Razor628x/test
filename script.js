@@ -90,7 +90,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const formData = new FormData(orderForm);
             const action = orderForm.getAttribute('action');
 
-        // Validasi dasar sisi klien (opsional, karena Formspree juga bisa validasi)
             const nama = document.getElementById('nama').value.trim();
             const email = document.getElementById('email').value.trim();
             const telepon = document.getElementById('telepon').value.trim();
@@ -106,14 +105,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 method: 'POST',
                 body: formData,
                 headers: {
-                    'Accept': 'application/json' // Penting agar Formspree mengembalikan JSON
+                    'Accept': 'application/json'
                 }
             })
             .then(response => {
-                if (response.ok) { // response.ok berarti status 200-299
-                    return response.json(); // Jika sukses, Formspree mungkin kirim JSON
+                if (response.ok) {
+                    return response.json();
                 } else {
-                // Coba dapatkan error dari Formspree jika ada
                     return response.json().then(data => {
                         let errorMessage = 'Terjadi kesalahan saat mengirim formulir.';
                         if (data && data.errors && data.errors.length > 0) {
@@ -125,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
                 }
             })
-            .then(data => { // data dari response.json() jika sukses
+            .then(data => {
                 displayFormMessage('Terima kasih! Permintaan Anda telah terkirim. Kami akan segera menghubungi Anda.', 'success');
                 orderForm.reset();
                 const pilihanPaketSelect = document.getElementById('pilihanPaket');
